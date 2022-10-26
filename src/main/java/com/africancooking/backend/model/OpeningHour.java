@@ -28,6 +28,7 @@ public class OpeningHours {
         LocalTime timeValue;
         LocalTime startTimeValue;
         LocalTime endTimeValue;
+        boolean doubleOpening;
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
