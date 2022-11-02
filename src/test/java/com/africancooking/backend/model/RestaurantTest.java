@@ -10,7 +10,7 @@ public class RestaurantTest {
 
     private Restaurant classUnderTest;
     private String restaurantName = "";
-    private Map<WorkingDaysOfWeek, OpeningHours> restaurantOpeningHours;
+    private Map<WorkingDaysOfWeek, HashSet<OpeningHour>> restaurantOpeningHours;
 
     private String companyName;
     private String legalForm;
@@ -30,12 +30,17 @@ public class RestaurantTest {
         restaurantOpeningHours = new HashMap<>();
 
 
-        restaurantOpeningHours.put(WorkingDaysOfWeek.MONDAY, new OpeningHours(List.of("09:00", "22:00")));
-        restaurantOpeningHours.put(WorkingDaysOfWeek.TUESDAY, new OpeningHours(List.of("09:00", "12:00", "14:00", "22:00")));
-        restaurantOpeningHours.put(WorkingDaysOfWeek.WEDNESDAY, new OpeningHours(List.of("14:00", "22:00")));
-        restaurantOpeningHours.put(WorkingDaysOfWeek.THURSDAY, new OpeningHours(List.of("09:00", "12:00", "14:00", "22:00")));
-        restaurantOpeningHours.put(WorkingDaysOfWeek.FRIDAY, new OpeningHours(List.of("09:00", "22:00")));
-        restaurantOpeningHours.put(WorkingDaysOfWeek.SATURDAY, new OpeningHours(List.of("09:00", "16:00")));
+        OpeningHours es = new OpeningHours();
+        es.add(new OpeningHour("09:00", "22:00"));
+        restaurantOpeningHours.put(WorkingDaysOfWeek.MONDAY, es);
+        HashSet<OpeningHour> es1 = new HashSet<>();
+        es1.add(new OpeningHour("09:00", "12:00"));
+        es1.add(new OpeningHour("14:00", "22:00"));
+        restaurantOpeningHours.put(WorkingDaysOfWeek.TUESDAY, es1);
+/*        restaurantOpeningHours.put(WorkingDaysOfWeek.WEDNESDAY, new OpeningHours(List.of("14:00", "22:00")));
+        restaurantOpeningHours.put(WorkingDaysOfWeek.THURSDAY, new OpeningHours(es1));
+        restaurantOpeningHours.put(WorkingDaysOfWeek.FRIDAY, new OpeningHours(es));
+        restaurantOpeningHours.put(WorkingDaysOfWeek.SATURDAY, new OpeningHours(List.of("09:00", "16:00")));*/
 
         classUnderTest = new Restaurant(restaurantOwner, restaurantName, restaurantAddress, restaurantOpeningHours);
 

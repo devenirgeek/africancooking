@@ -1,22 +1,6 @@
 package com.africancooking.backend.model;
 
-import java.util.List;
+import java.util.HashSet;
 
-public class OpeningHours {
-
-    private List<String> listOfOpeningHours;
-
-    public OpeningHours(List<String> openingHours) {
-        this.listOfOpeningHours = openingHours;
-    }
-
-    public List<String> getListOfOpeningHours() {
-        return listOfOpeningHours;
-    }
-
-    public void setListOfOpeningHours(List<String> listOfOpeningHours) {
-        this.listOfOpeningHours = listOfOpeningHours;
-    }
-
-
+public class OpeningHours extends HashSet<OpeningHour> {
 }

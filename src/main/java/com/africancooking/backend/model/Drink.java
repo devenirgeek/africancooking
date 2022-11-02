@@ -1,8 +1,9 @@
 package com.africancooking.backend.model;
 
 public class Drink {
+
     private String drinkName;
-    private Float drinkBottleCapacity;
+    private float drinkBottleCapacity;
 
     public String getDrinkName() {
         return drinkName;
@@ -12,7 +13,7 @@ public class Drink {
         this.drinkName = drinkName;
     }
 
-    public Float getDrinkBottleCapacity() {
+    public float getDrinkBottleCapacity() {
         return drinkBottleCapacity;
     }
 

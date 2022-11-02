@@ -1,12 +1,17 @@
 package com.africancooking.backend.model;
 
-public abstract class Menu {
+import java.util.List;
 
+public class Menu {
+
+    private List<Starter> starters;
+    private List<MainCourse> mainCourses;
+    private List<Dessert> desserts;
+    private List<Drink> drinks;
     private String menuName;
     private String menuDescription;
     private String menuPrice;
-    //Todo: Implement the parameter "menuPicture";
-
+    private String menuPicture;
 
     public Menu(String menuName, String menuDescription, String menuPrice) {
         this.menuName = menuName;

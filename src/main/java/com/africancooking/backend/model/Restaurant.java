@@ -2,19 +2,23 @@ package com.africancooking.backend.model;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-public class Restaurant { // The restaurant should be seen as a kind of resource, a container of information
+/**
+ * The restaurant should be seen as a kind of resource, a container of information
+ */
+public class Restaurant {
 
     private Person restaurantOwner;
     private String restaurantName;
     private Address address;
     private Rating restaurantRating;
-
     private  Map<WorkingDaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
-
-    // A Picture can be added
-    // List of Menu --> Class Menu must be implemented
+    private String restaurantPicture;
 
     public Restaurant(Person restaurantOwner, String restaurantName, Address address, Map<WorkingDaysOfWeek, OpeningHours> openingHoursByWorkingDay) {
         this.restaurantOwner = restaurantOwner;
@@ -23,8 +27,7 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
         this.openingHoursByWorkingDay = openingHoursByWorkingDay;
     }
 
-
-
+    
     public Person getRestaurantOwner() {
         return restaurantOwner;
     }
@@ -58,22 +61,22 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
     }
 
     public boolean isDoubleOpeningDay(WorkingDaysOfWeek day){
-        List<String> listOfOpeningHours = getOpeningHoursByWorkingDay().get(day).getListOfOpeningHours();
+/*        List<String> listOfOpeningHours = getOpeningHoursByWorkingDay().get(day).getListOfOpeningHours();
         if(listOfOpeningHours.size() > 2) {
             return true;
-        }
+        }*/
         return false;
     }
 
     public String getOpeningHoursByDay(){
         Set<WorkingDaysOfWeek> workingDaySet = openingHoursByWorkingDay.keySet();
-        List<String> listOfOpeningHours = new ArrayList<>();
+        OpeningHours listOfOpeningHours = new OpeningHours();
         String result = "";
 
         for(WorkingDaysOfWeek workingDay: workingDaySet) {
 
-            listOfOpeningHours = openingHoursByWorkingDay.get(workingDay).getListOfOpeningHours();
-
+            listOfOpeningHours = openingHoursByWorkingDay.get(workingDay);
+/*
             if (!isDoubleOpeningDay(workingDay)) {
                 result += " " + workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + "\n";
                 //return (workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + "\n");
@@ -82,7 +85,7 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
                 result += " " + workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + " and " + listOfOpeningHours.get(2) + " - " + listOfOpeningHours.get(3) + "\n";
                 //System.out.println(workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + " and " + listOfOpeningHours.get(2) + " - " + listOfOpeningHours.get(3) + "\n");
                 //return (workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + " and " + listOfOpeningHours.get(3) + " - " + listOfOpeningHours.get(3) + "\n");
-            }
+            }*/
 
         }
 
@@ -113,7 +116,8 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
 
             if(day == workingDay){
 
-                listOfOpeningHours = openingHoursByWorkingDay.get(day).getListOfOpeningHours();
+                //listOfOpeningHours = openingHoursByWorkingDay.get(day).getListOfOpeningHours();
+                listOfOpeningHours = new ArrayList<>();
 
                 if(!isDoubleOpeningDay(day)) {
 
