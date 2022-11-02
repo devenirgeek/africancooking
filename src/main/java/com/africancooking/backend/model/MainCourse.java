@@ -1,11 +1,11 @@
 package com.africancooking.backend.model;
 
-public class MainDish extends Menu{
+public class MainCourse extends Menu{
 
 
-    public MainDish(String menuName, String menuDescription, String menuPrice) {
+    public MainCourse(String menuName, String menuDescription, String menuPrice) {
         super(menuName, menuDescription, menuPrice);
     }
 
-    
+
 }

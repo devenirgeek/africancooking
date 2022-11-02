@@ -1,13 +1,40 @@
 package com.africancooking.backend.model;
 
-public abstract class LegalPerson extends User {
+import java.util.Set;
+
+public class LegalPerson extends Person {
 
     private String companyName;
     private String legalForm;
-    private String lastname;
+    private Set<String> companyDirectors;
 
-    public void testMethode(){
-
+    public LegalPerson(String companyName, String legalForm, Set<String> companyDirectors) {
+        this.companyName = companyName;
+        this.legalForm = legalForm;
+        this.companyDirectors = companyDirectors;
     }
 
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
+
+    public String getLegalForm() {
+        return legalForm;
+    }
+
+    public void setLegalForm(String legalForm) {
+        this.legalForm = legalForm;
+    }
+
+    public Set<String> getCompanyDirectors() {
+        return companyDirectors;
+    }
+
+    public void setCompanyDirectors(Set<String> companyDirectors) {
+        this.companyDirectors = companyDirectors;
+    }
 }

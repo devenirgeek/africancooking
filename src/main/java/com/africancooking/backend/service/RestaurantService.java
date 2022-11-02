@@ -1,2 +1,5 @@
-package com.africancooking.backend.service;public class RestaurantService {
+package com.africancooking.backend.service;
+
+public class RestaurantService {
+
 }

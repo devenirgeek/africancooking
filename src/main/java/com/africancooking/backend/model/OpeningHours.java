@@ -2,12 +2,12 @@ package com.africancooking.backend.model;
 
 import java.util.List;
 
-public class OpeningHour {
+public class OpeningHours {
 
     private List<String> listOfOpeningHours;
 
-    public OpeningHour(List<String> workingTime) {
-        this.listOfOpeningHours = workingTime;
+    public OpeningHours(List<String> openingHours) {
+        this.listOfOpeningHours = openingHours;
     }
 
     public List<String> getListOfOpeningHours() {
@@ -17,5 +17,6 @@ public class OpeningHour {
     public void setListOfOpeningHours(List<String> listOfOpeningHours) {
         this.listOfOpeningHours = listOfOpeningHours;
     }
+
 
 }
