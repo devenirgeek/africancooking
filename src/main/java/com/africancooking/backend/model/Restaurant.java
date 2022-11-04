@@ -2,6 +2,7 @@ package com.africancooking.backend.model;
 
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Restaurant { // The restaurant should be seen as a kind of resource, a container of information
@@ -22,8 +23,6 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
         this.address = address;
         this.openingHoursByWorkingDay = openingHoursByWorkingDay;
     }
-
-
 
     public Person getRestaurantOwner() {
         return restaurantOwner;
@@ -57,143 +56,72 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
         this.openingHoursByWorkingDay = openingHoursByWorkingDay;
     }
 
-    public boolean isDoubleOpeningDay(WorkingDaysOfWeek day){
-        List<String> listOfOpeningHours = getOpeningHoursByWorkingDay().get(day).getListOfOpeningHours();
-        if(listOfOpeningHours.size() > 2) {
+    public boolean isMultipleOpeningDay(WorkingDaysOfWeek day){
+        HashSet<OpeningHour> setOfOpeningHours; // Container for the class openingHour
+
+        setOfOpeningHours = openingHoursByWorkingDay.get(day); // Here we get the opening hours container of the working day
+
+        if(setOfOpeningHours.size() >=2 ) {
             return true;
         }
         return false;
     }
 
-    public String getOpeningHoursByDay(){
-        Set<WorkingDaysOfWeek> workingDaySet = openingHoursByWorkingDay.keySet();
-        List<String> listOfOpeningHours = new ArrayList<>();
-        String result = "";
-
-        for(WorkingDaysOfWeek workingDay: workingDaySet) {
-
-            listOfOpeningHours = openingHoursByWorkingDay.get(workingDay).getListOfOpeningHours();
-
-            if (!isDoubleOpeningDay(workingDay)) {
-                result += " " + workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + "\n";
-                //return (workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + "\n");
-                //System.out.println(workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + "\n");
-            } else {
-                result += " " + workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + " and " + listOfOpeningHours.get(2) + " - " + listOfOpeningHours.get(3) + "\n";
-                //System.out.println(workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + " and " + listOfOpeningHours.get(2) + " - " + listOfOpeningHours.get(3) + "\n");
-                //return (workingDay.toString() + ": " + listOfOpeningHours.get(0) + " - " + listOfOpeningHours.get(1) + " and " + listOfOpeningHours.get(3) + " - " + listOfOpeningHours.get(3) + "\n");
-            }
-
-        }
-
-        return result;
-    }
-
-    public OpeningStatus isOpen(WorkingDaysOfWeek day, String time){
-        Set<WorkingDaysOfWeek> workingDaySet = openingHoursByWorkingDay.keySet();
-        String openingTimeString;
-        String closingTimeString;
-        LocalTime timeValue;
-        LocalTime openingTime;
-        LocalTime closingTime;
-        LocalTime oneHourBeforeOpening;
-        LocalTime oneHourBeforeClosing;
-        List<String> listOfOpeningHours = new ArrayList<>();
-
+    private LocalTime ConvertStringToLocalTime(String time){
+        LocalTime localTime = null;
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         try {
-            LocalTime localTime = LocalTime.parse(time, timeFormatter);
-        }catch (Exception e){
-            System.out.println("Unable to convert string to time");
+            localTime = LocalTime.parse(time, timeFormatter);
+        }catch (DateTimeParseException e){
+            System.out.println( e.toString() + "\n" + " The text can not be parsed to the local time");
         }
+
+        return localTime;
+    }
+
+    public OpeningStatus isOpen(WorkingDaysOfWeek day, String time) {
+        Set<WorkingDaysOfWeek> workingDaySet = openingHoursByWorkingDay.keySet();
+        LocalTime openingTime;
+        LocalTime closingTime;
+        LocalTime oneHourBeforeOpening;
+        LocalTime oneHourBeforeClosing;
+        LocalTime timeValue;
+        HashSet<OpeningHour> openingHours; // Container for the class openingHour
+        OpeningStatus openingStatus = OpeningStatus.CLOSED;
 
         for(WorkingDaysOfWeek workingDay: workingDaySet) {
 
-            if(day == workingDay){
+            openingHours = openingHoursByWorkingDay.get(workingDay); // Here we get the opening hours container of the working day
 
-                listOfOpeningHours = openingHoursByWorkingDay.get(day).getListOfOpeningHours();
+            if(day == workingDay) {
+                timeValue = this.ConvertStringToLocalTime(time);
 
-                if(!isDoubleOpeningDay(day)) {
+                for (OpeningHour openingHour : openingHours) { //Do this for each item opening hour in container openingHours
+                    openingTime = openingHour.getLocalOpeningTime();
+                    closingTime = openingHour.getLocalClosingTime();
+                    oneHourBeforeOpening = openingTime.minusHours(1);
+                    oneHourBeforeClosing = closingTime.minusHours(1);
 
-                    openingTimeString = listOfOpeningHours.get(0);
-                    closingTimeString = listOfOpeningHours.get(1);
-
-                    try {
-                        timeValue = LocalTime.parse(time, timeFormatter);
-                        openingTime = LocalTime.parse(openingTimeString, timeFormatter);
-                        closingTime = LocalTime.parse(closingTimeString, timeFormatter);
-                        oneHourBeforeOpening = openingTime.minusHours(1);
-                        oneHourBeforeClosing = closingTime.minusHours(1);
-
-                        if (timeValue.compareTo(oneHourBeforeOpening) >= 0 && timeValue.compareTo(openingTime) < 0) {
-                            System.out.println("\n" + "The restaurant open soon");
-                            return OpeningStatus.OPENSOON;
-                        } else if (timeValue.compareTo(openingTime) >= 0 && timeValue.compareTo(oneHourBeforeClosing) < 0) {
-                            System.out.println("\n" + "The restaurant is opened");
-                            return OpeningStatus.OPENED;
-                        } else if (timeValue.compareTo(oneHourBeforeClosing) >= 0 && timeValue.compareTo(closingTime) < 0) {
-                            System.out.println("\n" + "The restaurant close soon");
-                            return OpeningStatus.CLOSESOON;
-                        } else {
-                            System.out.println("\n" + "The restaurant is not opened");
-                            return OpeningStatus.CLOSED;
-                        }
-
-                    } catch (Exception e) {
-                        System.out.println("Unable to convert string openingTimeString and closingTimeString into time format");
-                    }
-                }else{ //Check if it is a day with double opening
-
-                    String secondOpeningTimeString;
-                    String secondClosingTimeString;
-                    LocalTime secondOpeningTime;
-                    LocalTime secondClosingTime;
-                    LocalTime oneHourBeforeSecondOpening;
-                    LocalTime oneHourBeforeSecondClosing;
-
-                    openingTimeString = listOfOpeningHours.get(0);
-                    closingTimeString = listOfOpeningHours.get(1);
-                    secondOpeningTimeString = listOfOpeningHours.get(2);
-                    secondClosingTimeString = listOfOpeningHours.get(3);
-
-                    try {
-                        timeValue = LocalTime.parse(time, timeFormatter);
-                        openingTime = LocalTime.parse(openingTimeString, timeFormatter);
-                        closingTime = LocalTime.parse(closingTimeString, timeFormatter);
-                        oneHourBeforeOpening = openingTime.minusHours(1);
-                        oneHourBeforeClosing = closingTime.minusHours(1);
-
-                        secondOpeningTime = LocalTime.parse(secondOpeningTimeString, timeFormatter);
-                        secondClosingTime = LocalTime.parse(secondClosingTimeString, timeFormatter);
-                        oneHourBeforeSecondOpening = secondOpeningTime.minusHours(1);
-                        oneHourBeforeSecondClosing = secondClosingTime.minusHours(1);
-
-                        if ((timeValue.compareTo(oneHourBeforeOpening) >= 0 && timeValue.compareTo(openingTime) < 0) || (timeValue.compareTo(oneHourBeforeSecondOpening) >= 0 && timeValue.compareTo(secondOpeningTime) < 0)) {
-                            System.out.println("\n" + "The restaurant open soon");
-                            return OpeningStatus.OPENSOON;
-                        } else if ((timeValue.compareTo(openingTime) >= 0 && timeValue.compareTo(oneHourBeforeClosing) < 0) || (timeValue.compareTo(secondOpeningTime) >= 0 && timeValue.compareTo(oneHourBeforeSecondClosing) < 0)) {
-                            System.out.println("\n" + "The restaurant is opened");
-                            return OpeningStatus.OPENED;
-                        } else if ((timeValue.compareTo(oneHourBeforeClosing) >= 0 && timeValue.compareTo(closingTime) < 0) || (timeValue.compareTo(oneHourBeforeSecondClosing) >= 0 && timeValue.compareTo(secondClosingTime) < 0)) {
-                            System.out.println("\n" + "The restaurant close soon");
-                            return OpeningStatus.CLOSESOON;
-                        } else {
-                            System.out.println("\n" + "The restaurant is not opened");
-                            return OpeningStatus.CLOSED;
-                        }
-
-                    } catch (Exception e) {
-                        System.out.println("Unable to convert string openingTimeString and closingTimeString into time format");
+                    if (timeValue.compareTo(oneHourBeforeOpening) >= 0 && timeValue.compareTo(openingTime) < 0) {
+                        openingStatus = OpeningStatus.OPENSOON;
+                    } else if (timeValue.compareTo(openingTime) >= 0 && timeValue.compareTo(oneHourBeforeClosing) < 0) {
+                        openingStatus = OpeningStatus.OPENED;
+                    } else if (timeValue.compareTo(oneHourBeforeClosing) >= 0 && timeValue.compareTo(closingTime) < 0) {
+                        openingStatus = OpeningStatus.CLOSESOON;
+                    } else {
+                        openingStatus = OpeningStatus.CLOSED;
                     }
 
+                    if(openingStatus == OpeningStatus.OPENSOON || openingStatus == OpeningStatus.OPENED || openingStatus == OpeningStatus.CLOSESOON){
+                        return openingStatus;
+                    }
                 }
-
             }
         }
-        return OpeningStatus.CLOSED;
-    }
 
+        return openingStatus; //OpeningStatus.CLOSED;
+    }
 
 }

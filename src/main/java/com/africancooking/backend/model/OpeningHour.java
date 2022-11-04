@@ -20,24 +20,48 @@ import java.time.format.DateTimeParseException;
 public class OpeningHour implements Comparable<OpeningHour> {
 
 
-    private String openingtime;
+    private String openingTime;
     private String closingTime;
 
     private  DateTimeFormatter timeFormatter;
 
-    public OpeningHour(String openingtime, String closingTime) {
-        this.openingtime = openingtime;
+    public OpeningHour(String openingTime, String closingTime) {
+        this.openingTime = openingTime;
         this.closingTime = closingTime;
 
-        timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        this.timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+
+        CheckOpeningAndClosingTime(); //openingTime must be smaller than closingTime
     }
 
-    public String getOpeningtime() {
-        return openingtime;
+    private LocalTime ConvertStringToLocalTime(String time){
+        LocalTime localTime = null;
+
+        try {
+            localTime = LocalTime.parse(time, this.timeFormatter);
+        }catch (DateTimeParseException e){
+            System.out.println( e.toString() + "\n" + " The text can not be parsed to the local time");
+        }
+
+        return localTime;
     }
 
-    public void setOpeningtime(String openingtime) {
-        this.openingtime = openingtime;
+    private void CheckOpeningAndClosingTime(){
+        String value;
+        //openingTime must be smaller than closingTime: openingTime - closingTime < 0 --> openingTime is earlier than closingTime
+        if(getLocalOpeningTime().compareTo(getLocalClosingTime()) > 0){ // If openingTime - closingTime > 0 then ...
+            value = this.openingTime;
+            setOpeningTime(closingTime);
+            setClosingTime(value);
+        }
+    }
+
+    public String getOpeningTime() {
+        return openingTime;
+    }
+
+    public void setOpeningTime(String openingTime) {
+        this.openingTime = openingTime;
     }
 
     public String getClosingTime() {
@@ -51,32 +75,18 @@ public class OpeningHour implements Comparable<OpeningHour> {
     @Override
     public String toString() {
         return "OpeningHour{" +
-                "openingtime='" + openingtime + '\'' +
+                "openingtime='" + openingTime + '\'' +
                 ", closingTime='" + closingTime + '\'' +
                 '}';
     }
 
     public LocalTime getLocalOpeningTime(){
-        LocalTime localOpeningTime = null;
-
-        try{
-            localOpeningTime = LocalTime.parse(this.openingtime, timeFormatter);
-        }catch (DateTimeParseException e){
-            System.out.println( e.toString() + "\n" + " The opening time can not be parsed to the local time");
-        }
-
+        LocalTime localOpeningTime = this.ConvertStringToLocalTime(this.openingTime);
         return localOpeningTime;
     }
 
     public LocalTime getLocalClosingTime(){
-        LocalTime localClosingTime = null;
-
-        try{
-            localClosingTime = LocalTime.parse(this.closingTime, timeFormatter);
-        }catch (DateTimeParseException e){
-            System.out.println( e.toString() + "\n" + " The closing time can not be parsed to the local time");
-        }
-
+        LocalTime localClosingTime = this.ConvertStringToLocalTime(this.closingTime);
         return localClosingTime;
     }
 

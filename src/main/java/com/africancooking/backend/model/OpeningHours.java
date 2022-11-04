@@ -1,5 +1,6 @@
 package com.africancooking.backend.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -15,6 +16,9 @@ import java.util.List;
  */
 public class OpeningHours extends HashSet<OpeningHour> {
 
+
+
+    /*
     private List<String> listOfOpeningHours;
 
     public OpeningHours(List<String> openingHours) {
@@ -28,6 +32,6 @@ public class OpeningHours extends HashSet<OpeningHour> {
     public void setListOfOpeningHours(List<String> listOfOpeningHours) {
         this.listOfOpeningHours = listOfOpeningHours;
     }
-
+*/
 
 }
