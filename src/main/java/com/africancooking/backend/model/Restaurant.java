@@ -1,8 +1,5 @@
 package com.africancooking.backend.model;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Restaurant { // The restaurant should be seen as a kind of resource, a container of information
@@ -12,12 +9,12 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
     private Address address;
     private Rating restaurantRating;
 
-    private  Map<WorkingDaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
+    private  Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
 
     // A Picture can be added
     // List of Menu --> Class Menu must be implemented
 
-    public Restaurant(Person restaurantOwner, String restaurantName, Address address, Map<WorkingDaysOfWeek, OpeningHours> openingHoursByWorkingDay) {
+    public Restaurant(Person restaurantOwner, String restaurantName, Address address, Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay) {
         this.restaurantOwner = restaurantOwner;
         this.restaurantName = restaurantName;
         this.address = address;
@@ -48,15 +45,15 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
         this.address = address;
     }
 
-    public Map<WorkingDaysOfWeek, OpeningHours> getOpeningHoursByWorkingDay() {
+    public Map<DaysOfWeek, OpeningHours> getOpeningHoursByWorkingDay() {
         return openingHoursByWorkingDay;
     }
 
-    public void setOpeningHoursByWorkingDay(Map<WorkingDaysOfWeek, OpeningHours> openingHoursByWorkingDay) {
+    public void setOpeningHoursByWorkingDay(Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay) {
         this.openingHoursByWorkingDay = openingHoursByWorkingDay;
     }
 
-    public boolean isMultipleOpeningDay(WorkingDaysOfWeek day){
+    /*public boolean isMultipleOpeningDay(WorkingDaysOfWeek day){
         HashSet<OpeningHour> setOfOpeningHours; // Container for the class openingHour
 
         setOfOpeningHours = openingHoursByWorkingDay.get(day); // Here we get the opening hours container of the working day
@@ -99,8 +96,8 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
                 timeValue = this.ConvertStringToLocalTime(time);
 
                 for (OpeningHour openingHour : openingHours) { //Do this for each item opening hour in container openingHours
-                    openingTime = openingHour.getLocalOpeningTime();
-                    closingTime = openingHour.getLocalClosingTime();
+                    openingTime = openingHour.getOpeningTime();
+                    closingTime = openingHour.getClosingTime();
                     oneHourBeforeOpening = openingTime.minusHours(1);
                     oneHourBeforeClosing = closingTime.minusHours(1);
 
@@ -122,6 +119,6 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
         }
 
         return openingStatus; //OpeningStatus.CLOSED;
-    }
+    }*/
 
 }

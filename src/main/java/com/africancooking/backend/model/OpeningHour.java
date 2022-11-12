@@ -20,55 +20,40 @@ import java.time.format.DateTimeParseException;
 public class OpeningHour implements Comparable<OpeningHour> {
 
 
-    private String openingTime;
-    private String closingTime;
+    private LocalTime openingTime;
+    private LocalTime closingTime;
 
-    private  DateTimeFormatter timeFormatter;
-
-    public OpeningHour(String openingTime, String closingTime) {
+    public OpeningHour(LocalTime openingTime, LocalTime closingTime) {
         this.openingTime = openingTime;
         this.closingTime = closingTime;
-
-        this.timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
 
         CheckOpeningAndClosingTime(); //openingTime must be smaller than closingTime
     }
 
-    private LocalTime ConvertStringToLocalTime(String time){
-        LocalTime localTime = null;
-
-        try {
-            localTime = LocalTime.parse(time, this.timeFormatter);
-        }catch (DateTimeParseException e){
-            System.out.println( e.toString() + "\n" + " The text can not be parsed to the local time");
-        }
-
-        return localTime;
-    }
 
     private void CheckOpeningAndClosingTime(){
-        String value;
+        LocalTime value;
         //openingTime must be smaller than closingTime: openingTime - closingTime < 0 --> openingTime is earlier than closingTime
-        if(getLocalOpeningTime().compareTo(getLocalClosingTime()) > 0){ // If openingTime - closingTime > 0 then ...
+        if(getOpeningTime().compareTo(getClosingTime()) > 0){ // If openingTime - closingTime > 0 then ...
             value = this.openingTime;
             setOpeningTime(closingTime);
             setClosingTime(value);
         }
     }
 
-    public String getOpeningTime() {
+    public LocalTime getOpeningTime() {
         return openingTime;
     }
 
-    public void setOpeningTime(String openingTime) {
+    public void setOpeningTime(LocalTime openingTime) {
         this.openingTime = openingTime;
     }
 
-    public String getClosingTime() {
+    public LocalTime getClosingTime() {
         return closingTime;
     }
 
-    public void setClosingTime(String closingTime) {
+    public void setClosingTime(LocalTime closingTime) {
         this.closingTime = closingTime;
     }
 
@@ -80,18 +65,9 @@ public class OpeningHour implements Comparable<OpeningHour> {
                 '}';
     }
 
-    public LocalTime getLocalOpeningTime(){
-        LocalTime localOpeningTime = this.ConvertStringToLocalTime(this.openingTime);
-        return localOpeningTime;
-    }
-
-    public LocalTime getLocalClosingTime(){
-        LocalTime localClosingTime = this.ConvertStringToLocalTime(this.closingTime);
-        return localClosingTime;
-    }
 
     @Override
     public int compareTo(OpeningHour objectToBeCompared) {
-        return this.getLocalOpeningTime().compareTo(objectToBeCompared.getLocalOpeningTime());
+        return this.getOpeningTime().compareTo(objectToBeCompared.getOpeningTime());
     }
 }

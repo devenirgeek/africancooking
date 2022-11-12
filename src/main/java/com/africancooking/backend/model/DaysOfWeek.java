@@ -1,5 +1,5 @@
 package com.africancooking.backend.model;
 
-public enum WorkingDaysOfWeek {
+public enum DaysOfWeek {
     MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY
 }

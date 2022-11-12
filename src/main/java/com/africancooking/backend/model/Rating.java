@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class Rating {
 
-    private WebUser webUser;
+    private AppUser webUser;
     private Restaurant restaurant;
     private float scalar;
     private float value;
