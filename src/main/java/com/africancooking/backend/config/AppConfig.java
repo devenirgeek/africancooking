@@ -2,9 +2,9 @@ package com.africancooking.backend.config;
 
 import com.africancooking.backend.mappers.UserAccountMapper;
 import com.africancooking.backend.mappers.UserAccountMapperImpl;
+import com.africancooking.backend.security.BCryptPasswordEncoder;
+import com.africancooking.backend.security.PasswordEncoder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component

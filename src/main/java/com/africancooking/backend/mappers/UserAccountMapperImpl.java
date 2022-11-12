@@ -2,10 +2,10 @@ package com.africancooking.backend.mappers;
 
 import com.africancooking.backend.data.UserAccount;
 import com.africancooking.backend.model.requests.UserRegistrationRequest;
+import com.africancooking.backend.model.responses.UserLoginResponse;
 import com.africancooking.backend.model.responses.UserRegistrationResponse;
+import com.africancooking.backend.security.PasswordEncoder;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 public class UserAccountMapperImpl implements UserAccountMapper {
@@ -23,7 +23,19 @@ public class UserAccountMapperImpl implements UserAccountMapper {
     }
 
     @Override
-    public UserRegistrationResponse mapToResponse(UserAccount savedUserAccount) {
-        return null;
+    public UserRegistrationResponse mapToRegistrationResponse(UserAccount savedUserAccount) {
+
+        UserRegistrationResponse userRegistrationResponse = new UserRegistrationResponse();
+        userRegistrationResponse.setUsername(savedUserAccount.getUserName());
+
+        return userRegistrationResponse;
+    }
+
+    @Override
+    public UserLoginResponse toLoginResponse(UserAccount foundUserAccount) {
+        UserLoginResponse response = new UserLoginResponse();
+        response.setEmail(foundUserAccount.getEmail());
+        response.setId(foundUserAccount.getId());
+        return response;
     }
 }

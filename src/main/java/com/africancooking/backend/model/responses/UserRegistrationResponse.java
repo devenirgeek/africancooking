@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class UserRegistrationResponse {
     private Status registrationStatus = Status.SUCCESS;
-    private Status username;
+    private String username;
 }
