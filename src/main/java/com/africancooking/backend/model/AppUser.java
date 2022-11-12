@@ -8,8 +8,8 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-public class AppUser extends NaturalPerson{
+@EqualsAndHashCode(callSuper = true)
+public class AppUser extends NaturalPerson {
 
 
     private Long id;  // id must be generated automatically when new user is created
