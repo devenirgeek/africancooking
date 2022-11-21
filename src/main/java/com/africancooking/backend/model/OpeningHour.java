@@ -19,7 +19,6 @@ import java.time.format.DateTimeParseException;
  */
 public class OpeningHour implements Comparable<OpeningHour> {
 
-
     private LocalTime openingTime;
     private LocalTime closingTime;
 

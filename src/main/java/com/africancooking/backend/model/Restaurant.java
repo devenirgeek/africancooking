@@ -14,6 +14,9 @@ public class Restaurant { // The restaurant should be seen as a kind of resource
     // A Picture can be added
     // List of Menu --> Class Menu must be implemented
 
+    public Restaurant(){
+
+    }
     public Restaurant(Person restaurantOwner, String restaurantName, Address address, Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay) {
         this.restaurantOwner = restaurantOwner;
         this.restaurantName = restaurantName;
