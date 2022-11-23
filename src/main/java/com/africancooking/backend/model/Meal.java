@@ -1,5 +1,5 @@
 package com.africancooking.backend.model;
 
-public enum Meals {
+public enum Meal {
     BREAKFAST, LUNCH, DINNER
 }

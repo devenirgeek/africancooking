@@ -1,6 +1,13 @@
 package com.africancooking.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
 import java.util.Set;
+
+
 
 public class LegalPerson extends Person {
 

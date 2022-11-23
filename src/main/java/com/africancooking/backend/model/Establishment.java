@@ -1,16 +1,28 @@
 package com.africancooking.backend.model;
 
+import lombok.Data;
+
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
-public class RestaurantType {
-    
+@Data
+public class Establishment {
+
     private Person owner;
     private String name;
     private Address address;
     private String telephoneNumber;
-    private String aboutRestaurant;
+    private String aboutTheEstablishment;
     private String website;
+
+    private Set<String> photos;
+    private Set<EstablishmentType> establishmentTypes; // The Establishment can offer more than one service
+    private Set<Meal> meals;
+    private Set<SpecialFeatures> specialFeatures;
+    private Set<AlternativeDiets> alternativeDiets;
+    private Set<SuitableFor> suitableFo;
+    private Set<Kitchen> kitchens;
     private Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
 
 }

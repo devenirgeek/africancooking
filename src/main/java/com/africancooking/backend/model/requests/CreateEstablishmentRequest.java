@@ -1,27 +1,33 @@
 package com.africancooking.backend.model.requests;
 
-import com.africancooking.backend.model.Address;
-import com.africancooking.backend.model.DaysOfWeek;
-import com.africancooking.backend.model.OpeningHours;
-import com.africancooking.backend.model.Person;
+import com.africancooking.backend.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateRestaurantRequest {
+public class CreateEstablishmentRequest {
 
     private Person owner;
     private String name;
-    private Address address;
+    /*private Address address;
     private String telephoneNumber;
-    private String aboutRestaurant;
+    private String aboutTheEstablishment;
     private String website;
-    private Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
+
+    //private Set<String> photos;
+    private Set<EstablishmentType> establishmentTypes; // The Establishment can offer more than one service
+    private Set<Meal> meals;
+    private Set<SpecialFeatures> specialFeatures;
+    private Set<AlternativeDiets> alternativeDiets;
+    private Set<SuitableFor> suitableFor;
+    private Set<Kitchen> kitchens;
+    private Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();*/
 
 }

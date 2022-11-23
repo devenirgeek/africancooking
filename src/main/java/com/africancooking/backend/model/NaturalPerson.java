@@ -1,5 +1,8 @@
 package com.africancooking.backend.model;
 
+import javax.persistence.Entity;
+
+
 public class NaturalPerson extends Person {
     private String firstname;
     private String lastname;

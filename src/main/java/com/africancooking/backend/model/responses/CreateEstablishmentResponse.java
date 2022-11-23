@@ -5,11 +5,11 @@ import com.africancooking.backend.model.Status;
 import lombok.Data;
 
 @Data
-public class CreateRestaurantResponse {
+public class CreateEstablishmentResponse {
     private Status createRestaurantStatus = Status.SUCCESS;
     private String name;
     private Address address;
     private String telephoneNumber;
-    private String aboutRestaurant;
+    private String aboutEstablishment;
     private String website;
 }

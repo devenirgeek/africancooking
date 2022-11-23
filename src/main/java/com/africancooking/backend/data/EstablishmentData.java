@@ -1,34 +1,35 @@
 package com.africancooking.backend.data;
 
-import com.africancooking.backend.model.Address;
-import com.africancooking.backend.model.DaysOfWeek;
-import com.africancooking.backend.model.OpeningHours;
-import com.africancooking.backend.model.Person;
+import com.africancooking.backend.model.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "restaurant_data")
-public class RestaurantData {
+@Table(name = "establishment_data")
+public class EstablishmentData {
     @Id
     @GeneratedValue
     private Long id;
     private Person owner;
     private String name;
-    private Address address;
+    /*private Address address;
     private String telephoneNumber;
-    private String aboutRestaurant;
+    private String aboutEstablishment;
     private String website;
-    private Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
+
+    private Set<String> photos;
+    private Set<EstablishmentType> establishmentTypes; // The Establishment can offer more than one service
+    private Set<Meal> meals;
+    private Set<SpecialFeatures> specialFeatures;
+    private Set<AlternativeDiets> alternativeDiets;
+    private Set<SuitableFor> suitableFor;
+    private Set<Kitchen> kitchens;
+    private Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay;*/
 }

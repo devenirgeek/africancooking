@@ -1,7 +1,7 @@
 package com.africancooking.backend.service;
 
 import com.africancooking.backend.data.EstablishmentData;
-import com.africancooking.backend.mappers.RestaurantMapper;
+import com.africancooking.backend.mappers.EstablishmentMapper;
 import com.africancooking.backend.model.requests.CreateEstablishmentRequest;
 import com.africancooking.backend.model.responses.CreateEstablishmentResponse;
 import com.africancooking.backend.repositories.EstablishmentRepository;
@@ -10,17 +10,17 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-public class RestaurantServiceImpl implements RestaurantService{
+public class EstablishmentServiceImpl implements EstablishmentService {
 
-    private final RestaurantMapper restaurantMapper;
-    private final EstablishmentRepository restaurantRepository;
+    private final EstablishmentMapper establishmentMapper;
+    private final EstablishmentRepository establishmentRepository;
 
 
     @Override
-    public CreateEstablishmentResponse createRestaurant(CreateEstablishmentRequest request) {
-        EstablishmentData restaurantData = restaurantMapper.mapToRestaurantData(request);
-        EstablishmentData savedRestaurant = restaurantRepository.save(restaurantData);
-        CreateEstablishmentResponse response = restaurantMapper.mapToCreateRestaurantResponse(savedRestaurant);
+    public CreateEstablishmentResponse createEstablishment(CreateEstablishmentRequest request) {
+        EstablishmentData establishmentData = establishmentMapper.mapToEstablishmentData(request);
+        EstablishmentData savedEstablishment = establishmentRepository.save(establishmentData);
+        CreateEstablishmentResponse response = establishmentMapper.mapToCreateEstablishmentResponse(savedEstablishment);
         return response;
     }
 
