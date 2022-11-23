@@ -18,10 +18,10 @@ public class Establishment {
 
     private Set<String> photos;
     private Set<EstablishmentType> establishmentTypes; // The Establishment can offer more than one service
-    private Set<Meal> meals;
+    private Set<Meal> meals; // BREAKFAST, LUNCH or DINNER
     private Set<SpecialFeatures> specialFeatures;
     private Set<AlternativeDiets> alternativeDiets;
-    private Set<SuitableFor> suitableFo;
+    private Set<SuitableFor> suitableFor;
     private Set<Kitchen> kitchens;
     private Map<DaysOfWeek, OpeningHours> openingHoursByWorkingDay = new HashMap<>();
 

@@ -1,12 +1,15 @@
 package com.africancooking.backend.controller;
 
 import com.africancooking.backend.model.requests.CreateEstablishmentRequest;
+import com.africancooking.backend.model.requests.CreateReviewRequest;
 import com.africancooking.backend.model.requests.UserLoginRequest;
 import com.africancooking.backend.model.requests.UserRegistrationRequest;
 import com.africancooking.backend.model.responses.CreateEstablishmentResponse;
+import com.africancooking.backend.model.responses.CreateReviewResponse;
 import com.africancooking.backend.model.responses.UserLoginResponse;
 import com.africancooking.backend.model.responses.UserRegistrationResponse;
 import com.africancooking.backend.service.EstablishmentService;
+import com.africancooking.backend.service.ReviewService;
 import com.africancooking.backend.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,8 @@ public class UserAccountController {
 
     private final UserAccountService userAccountService;
     private final EstablishmentService establishmentService;
+
+    private final ReviewService reviewService;
 
     @PostMapping(path = "/user/registration")
     public UserRegistrationResponse registerUser(@RequestBody UserRegistrationRequest request){
@@ -36,6 +41,10 @@ public class UserAccountController {
     @PostMapping(path = "/establishment/create")
     public CreateEstablishmentResponse createEstablishment(@RequestBody CreateEstablishmentRequest request){
         return establishmentService.createEstablishment(request);
+    }
+
+    public CreateReviewResponse createReviewResponse(@RequestBody CreateReviewRequest request){
+        return reviewService.createReview(request);
     }
 
 
