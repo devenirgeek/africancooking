@@ -6,10 +6,12 @@ import com.africancooking.backend.model.OpeningHours;
 import com.africancooking.backend.model.requests.CreateEstablishmentRequest;
 import com.africancooking.backend.model.responses.CreateEstablishmentResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 @RequiredArgsConstructor
 public class EstablishmentMapperImpl implements EstablishmentMapper {
 
@@ -18,9 +20,10 @@ public class EstablishmentMapperImpl implements EstablishmentMapper {
     @Override
     public EstablishmentData mapToEstablishmentData(CreateEstablishmentRequest request) {
         EstablishmentData establishment = new EstablishmentData();
-        establishment.setOwner(request.getOwner());
+
         establishment.setName(request.getName());
-        /*establishment.setAddress(request.getAddress());
+        /*establishment.setOwner(request.getOwner());
+        establishment.setAddress(request.getAddress());
         establishment.setTelephoneNumber(request.getTelephoneNumber());
         establishment.setAboutEstablishment(request.getAboutTheEstablishment());
         establishment.setWebsite(request.getWebsite());

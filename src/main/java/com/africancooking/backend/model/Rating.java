@@ -1,7 +1,6 @@
 package com.africancooking.backend.model;
 
-import com.africancooking.backend.data.UserAccount;
-import lombok.Data;
+import com.africancooking.backend.data.UserAccountData;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -17,7 +16,7 @@ import lombok.Setter;
 public class Rating {
 
     //private AppUser webUser;
-    private UserAccount userAccount;
+    private UserAccountData userAccountData;
     private Establishment establishment;
 
     private ReviewItems reviewItems;
@@ -28,8 +27,8 @@ public class Rating {
     private float scalar; //The total number of users who have rated a particular restaurant
     private float value;
 
-    public Rating(UserAccount userAccount, Establishment establishment, ReviewItems ratingCuisine, ReviewItems ratingService, ReviewItems ratingQuality) {
-        this.userAccount = userAccount;
+    public Rating(UserAccountData userAccountData, Establishment establishment, ReviewItems ratingCuisine, ReviewItems ratingService, ReviewItems ratingQuality) {
+        this.userAccountData = userAccountData;
         this.establishment = establishment;
         this.ratingCuisine = ratingCuisine;
         this.ratingService = ratingService;

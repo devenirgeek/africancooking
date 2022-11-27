@@ -19,6 +19,8 @@ public class EstablishmentServiceImpl implements EstablishmentService {
     @Override
     public CreateEstablishmentResponse createEstablishment(CreateEstablishmentRequest request) {
         EstablishmentData establishmentData = establishmentMapper.mapToEstablishmentData(request);
+        //ToDo: Find UserAccount by ID in the UserAccountRepository
+        //ToDo: Add --> establishmentData.setOwner() --> Add all the property of EstablishmentData by using Set-Methode before to save all the information in the database;
         EstablishmentData savedEstablishment = establishmentRepository.save(establishmentData);
         CreateEstablishmentResponse response = establishmentMapper.mapToCreateEstablishmentResponse(savedEstablishment);
         return response;

@@ -1,7 +1,6 @@
 package com.africancooking.backend.model;
 
-import com.africancooking.backend.data.UserAccount;
-import lombok.Data;
+import com.africancooking.backend.data.UserAccountData;
 import lombok.Getter;
 import lombok.Setter;
 

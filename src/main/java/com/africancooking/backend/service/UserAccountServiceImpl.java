@@ -1,6 +1,6 @@
 package com.africancooking.backend.service;
 
-import com.africancooking.backend.data.UserAccount;
+import com.africancooking.backend.data.UserAccountData;
 import com.africancooking.backend.mappers.UserAccountMapper;
 import com.africancooking.backend.model.requests.UserLoginRequest;
 import com.africancooking.backend.model.requests.UserRegistrationRequest;
@@ -19,16 +19,16 @@ public class UserAccountServiceImpl implements UserAccountService{
 
     @Override
     public UserRegistrationResponse registerUser(UserRegistrationRequest request) {
-        UserAccount userAccount = userAccountMapper.mapToData(request);
-        UserAccount savedUserAccount = userAccountRepository.save(userAccount);
-        UserRegistrationResponse response = userAccountMapper.mapToRegistrationResponse(savedUserAccount);
+        UserAccountData userAccountData = userAccountMapper.mapToData(request);
+        UserAccountData savedUserAccountData = userAccountRepository.save(userAccountData);
+        UserRegistrationResponse response = userAccountMapper.mapToRegistrationResponse(savedUserAccountData);
         return response;
     }
 
     @Override
     public UserLoginResponse loginUser(UserLoginRequest request) {
-        UserAccount foundUserAccount = userAccountRepository.findByUserNameAndEncryptedPassword(request.getUsername(), request.getPassword());
-        UserLoginResponse response = userAccountMapper.toLoginResponse(foundUserAccount);
+        UserAccountData foundUserAccountData = userAccountRepository.findByUserNameAndEncryptedPassword(request.getUsername(), request.getPassword());
+        UserLoginResponse response = userAccountMapper.toLoginResponse(foundUserAccountData);
         return response;
     }
 }

@@ -1,6 +1,6 @@
 package com.africancooking.backend.mappers;
 
-import com.africancooking.backend.data.UserAccount;
+import com.africancooking.backend.data.UserAccountData;
 import com.africancooking.backend.model.requests.UserRegistrationRequest;
 import com.africancooking.backend.model.responses.UserLoginResponse;
 import com.africancooking.backend.model.responses.UserRegistrationResponse;
@@ -13,29 +13,29 @@ public class UserAccountMapperImpl implements UserAccountMapper {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserAccount mapToData(UserRegistrationRequest request) {
-        UserAccount userAccount = new UserAccount();
-        userAccount.setEmail(request.getEmail());
+    public UserAccountData mapToData(UserRegistrationRequest request) {
+        UserAccountData userAccountData = new UserAccountData();
+        userAccountData.setEmail(request.getEmail());
         String encode = passwordEncoder.encode(request.getPassword());
-        userAccount.setEncryptedPassword(encode);
-        userAccount.setUserName(request.getUsername());
-        return userAccount;
+        userAccountData.setEncryptedPassword(encode);
+        userAccountData.setUserName(request.getUsername());
+        return userAccountData;
     }
 
     @Override
-    public UserRegistrationResponse mapToRegistrationResponse(UserAccount savedUserAccount) {
+    public UserRegistrationResponse mapToRegistrationResponse(UserAccountData savedUserAccountData) {
 
         UserRegistrationResponse userRegistrationResponse = new UserRegistrationResponse();
-        userRegistrationResponse.setUsername(savedUserAccount.getUserName());
+        userRegistrationResponse.setUsername(savedUserAccountData.getUserName());
 
         return userRegistrationResponse;
     }
 
     @Override
-    public UserLoginResponse toLoginResponse(UserAccount foundUserAccount) {
+    public UserLoginResponse toLoginResponse(UserAccountData foundUserAccountData) {
         UserLoginResponse response = new UserLoginResponse();
-        response.setEmail(foundUserAccount.getEmail());
-        response.setId(foundUserAccount.getId());
+        response.setEmail(foundUserAccountData.getEmail());
+        response.setId(foundUserAccountData.getId());
         return response;
     }
 }

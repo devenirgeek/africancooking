@@ -4,10 +4,7 @@ import com.africancooking.backend.model.Establishment;
 import com.africancooking.backend.model.ReviewItems;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Data
@@ -19,8 +16,13 @@ public class ReviewData {
     @Id
     @GeneratedValue
     private Long id;
-    private UserAccount userAccount;
-    private Establishment establishment;
+
+    @OneToOne
+    private UserAccountData userAccountData;
+
+    @OneToOne
+    private EstablishmentData establishment;
+
     private ReviewItems ratingCuisine; // EXCELLENT, GOOD, ACCEPTABLE, BAD or VERY_BAD
     private ReviewItems ratingService; // EXCELLENT, GOOD, ACCEPTABLE, BAD or VERY_BAD
     private ReviewItems ratingQuality; // EXCELLENT, GOOD, ACCEPTABLE, BAD or VERY_BAD

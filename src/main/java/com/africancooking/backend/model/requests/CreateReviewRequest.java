@@ -1,8 +1,10 @@
 package com.africancooking.backend.model.requests;
 
-import com.africancooking.backend.data.UserAccount;
+import com.africancooking.backend.data.EstablishmentData;
+import com.africancooking.backend.data.UserAccountData;
 import com.africancooking.backend.model.Establishment;
 import com.africancooking.backend.model.ReviewItems;
+import com.africancooking.backend.model.UserAccount;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

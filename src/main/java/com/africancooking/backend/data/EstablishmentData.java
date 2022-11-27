@@ -17,12 +17,22 @@ public class EstablishmentData {
     @Id
     @GeneratedValue
     private Long id;
-    private Person owner;
+
+    @OneToOne
+    private PersonData owner;
+
     private String name;
-    /*private Address address;
+
+    private String country;
+    private String city;
+    private String zipCode; // PLZ
+    private String addressLine1; //Streetname and Housenumber
+    private String addressLine2; //Addiional Information
     private String telephoneNumber;
-    private String aboutEstablishment;
+    private String aboutTheEstablishment;
     private String website;
+
+    /*
 
     private Set<String> photos;
     private Set<EstablishmentType> establishmentTypes; // The Establishment can offer more than one service
