@@ -26,7 +26,7 @@ public class ReviewMapperImpl implements ReviewMapper{
         reviewData.setUserAccountData(userAccountData);
 
         EstablishmentData establishmentData = new EstablishmentData();
-        establishmentData.setName(request.getEstablishment().getName());
+        establishmentData.setEstablishmentName(request.getEstablishment().getName());
 
         PersonData personData = new PersonData();
         personData.setPersonType(request.getEstablishment().getOwner().toString());

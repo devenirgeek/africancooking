@@ -6,8 +6,7 @@ import lombok.Data;
 
 @Data
 public class CreateEstablishmentResponse {
-    private Status createRestaurantStatus = Status.SUCCESS;
-    private String name;
+    private String establishmentName;
     private String telephoneNumber;
     private String website;
 }

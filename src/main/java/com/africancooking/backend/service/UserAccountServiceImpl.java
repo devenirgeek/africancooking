@@ -28,7 +28,11 @@ public class UserAccountServiceImpl implements UserAccountService{
     @Override
     public UserLoginResponse loginUser(UserLoginRequest request) {
         UserAccountData foundUserAccountData = userAccountRepository.findByUserNameAndEncryptedPassword(request.getUsername(), request.getPassword());
-        UserLoginResponse response = userAccountMapper.toLoginResponse(foundUserAccountData);
+        if (foundUserAccountData == null){
+             throw new IllegalArgumentException("Invalid credential provided");
+        }
+
+        UserLoginResponse response = userAccountMapper.mapToLoginResponse(foundUserAccountData);
         return response;
     }
 }

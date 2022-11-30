@@ -20,5 +20,5 @@ public class PersonData {
     private long id;
 
     private String personType;
-
+    private String establishmentName;
 }

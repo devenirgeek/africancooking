@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class UserRegistrationResponse {
-    private Status registrationStatus = Status.SUCCESS;
     private String username;
+    private String email;
+    private Long id;
 }

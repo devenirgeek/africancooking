@@ -10,5 +10,5 @@ public interface UserAccountMapper {
 
     UserRegistrationResponse mapToRegistrationResponse(UserAccountData savedUserAccountData);
 
-    UserLoginResponse toLoginResponse(UserAccountData foundUserAccountData);
+    UserLoginResponse mapToLoginResponse(UserAccountData foundUserAccountData);
 }

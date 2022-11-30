@@ -27,15 +27,18 @@ public class UserAccountMapperImpl implements UserAccountMapper {
 
         UserRegistrationResponse userRegistrationResponse = new UserRegistrationResponse();
         userRegistrationResponse.setUsername(savedUserAccountData.getUserName());
+        userRegistrationResponse.setId(savedUserAccountData.getId());
+        userRegistrationResponse.setEmail(savedUserAccountData.getEmail());
 
         return userRegistrationResponse;
     }
 
     @Override
-    public UserLoginResponse toLoginResponse(UserAccountData foundUserAccountData) {
+    public UserLoginResponse mapToLoginResponse(UserAccountData foundUserAccountData) {
         UserLoginResponse response = new UserLoginResponse();
-        response.setEmail(foundUserAccountData.getEmail());
         response.setId(foundUserAccountData.getId());
+        response.setEmail(foundUserAccountData.getEmail());
+        response.setEmail(foundUserAccountData.getEmail());
         return response;
     }
 }

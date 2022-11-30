@@ -32,7 +32,7 @@ public class UserAccountController {
     }
 
 
-    @GetMapping(path = "/user/login")
+    @PostMapping(path = "/user/login")
     public UserLoginResponse loginUser(@RequestBody UserLoginRequest request){
         System.out.println("get user account is called");
         return userAccountService.loginUser(request);

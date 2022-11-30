@@ -14,8 +14,9 @@ import java.util.Set;
 @AllArgsConstructor
 public class CreateEstablishmentRequest {
 
-    private Long ownerID;
-    private String name;
+    private Long ownerID; // Or UserID
+    private String establishmentName;
+    private String personType;// Legal- or Natural Person
     private String country;
     private String city;
     private String zipCode; // PLZ

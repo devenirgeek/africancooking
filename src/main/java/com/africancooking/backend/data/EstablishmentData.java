@@ -21,7 +21,7 @@ public class EstablishmentData {
     @OneToOne
     private PersonData owner;
 
-    private String name;
+    private String establishmentName;
 
     private String country;
     private String city;
